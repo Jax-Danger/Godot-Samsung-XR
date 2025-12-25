@@ -1,0 +1,30 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="MySamsungXRGame"
+run/main_scene="uid://cqow47bch5ocs"
+config/features=PackedStringArray("4.5", "Forward Plus")
+config/icon="res://icon.svg"
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
+viewport/transparent_background=true
+
+[xr]
+
+openxr/enabled=true
+openxr/reference_space=0
+openxr/extensions/hand_tracking=true
+openxr/extensions/eye_gaze_interaction=true
+shaders/enabled=true
+openxr/extensions/androidxr/passthrough_camera_state=true

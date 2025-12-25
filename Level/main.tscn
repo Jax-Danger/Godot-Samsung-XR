@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqow47bch5ocs"]
+
+[ext_resource type="PackedScene" uid="uid://vn4wmsxa1mun" path="res://Player/XRPlayer.tscn" id="1_gqyk6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gqyk6"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_r23e8"]
+sky_material = SubResource("ProceduralSkyMaterial_gqyk6")
+
+[sub_resource type="Environment" id="Environment_eo7o3"]
+sky = SubResource("Sky_r23e8")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gqyk6"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3hbn"]
+albedo_color = Color(0.14439017, 0.65715224, 1.92523e-07, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r23e8"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_eo7o3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(15.206787, 0.001, 13.5078125)
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1894888, 0.40253547, 4.1625204)
+mass = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_gqyk6")
+surface_material_override/0 = SubResource("StandardMaterial3D_q3hbn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_r23e8")
+
+[node name="XROrigin3D" parent="." instance=ExtResource("1_gqyk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65897465, 0.00050008297, 6.674298)

@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://vn4wmsxa1mun"]
+
+[ext_resource type="Script" uid="uid://d1ua6tbs3170o" path="res://scripts/MainXR.gd" id="1_4oo4s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ix6iv"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4oo4s"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wl61s"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[node name="XROrigin3D" type="XROrigin3D"]
+current = true
+script = ExtResource("1_4oo4s")
+
+[node name="HMD" type="XRCamera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9204004, 0)
+
+[node name="LeftHand" type="XRNode3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40046853, 1.2852008, 0)
+tracker = &"left_hand"
+pose = &"grip"
+show_when_tracked = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LeftHand"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftHand/StaticBody3D"]
+shape = SubResource("BoxShape3D_ix6iv")
+
+[node name="HandMesh" type="MeshInstance3D" parent="LeftHand/StaticBody3D"]
+mesh = SubResource("BoxMesh_4oo4s")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="RightHand" type="XRNode3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3900345, 1.2740221, 0)
+tracker = &"right_hand"
+pose = &"grip"
+show_when_tracked = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RightHand"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightHand/StaticBody3D"]
+shape = SubResource("BoxShape3D_wl61s")
+
+[node name="HandMesh" type="MeshInstance3D" parent="RightHand/StaticBody3D"]
+mesh = SubResource("BoxMesh_4oo4s")
