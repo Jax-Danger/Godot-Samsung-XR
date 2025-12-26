@@ -30,7 +30,7 @@ Must use the Godot Engine from their official website. Steam version will NOT wo
 `adb start-server` which makes your computer say "Hey I can be connected to"
 * Now type this(note: replace "IP":"PORT" with your actual IP and Port)
 command: `adb pair IP:PORT` then enter the pair code seen in your headset.
-* Once that is completed, type this command: `adb connect IP:PORT` and this actually connects the device to your computer.
+* Once that is completed, the window for pairing in your headset should disappear, and you will notice a different IP:PORT. Type this command: `adb connect IP:PORT` using the different IP:PORT, and this actually connects the device to your computer. A little confusing that the device has two IP:PORTs, but it's fine.
 * If everything is done correctly, you should see the name of your computer in your headset developer options, and when you run `adb devices` in your terminal, you should see a device. That device is your headset.
 
 ## Debugging:
