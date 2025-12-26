@@ -1,7 +1,10 @@
 # Godot-Samsung-XR
 Godot project for the Samsung XR. This repository is for those who want to make a game in godot for their Samsung XR. 
 
-Steps to get godot to communicate with your SamsungXR
+Below are the steps to get godot to communicate with your SamsungXR. If you want to try the godot project from this repository without setting up a godot project yourself, simply skip all godot steps. But I do highly recommend following the steps as it is good practice to get used to how it works in the event something happens to this repository.
+
+
+
 # PC Setup
 
 ## Important
