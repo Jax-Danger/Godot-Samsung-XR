@@ -87,8 +87,6 @@ Once more, if you need more information on what these nodes do, you can get a de
 * These instructions don't show how to get hand tracking working, but you can still add a mesh to each node, which we will do below.
 * Add a child to each Hand: CSGBox3D with collision enabled if you want collision.
 
-All that is left is making a scene so we can have objects such as a cube in our passthrough to verify it works. Sure, seeing the meshes in either hand confirms it, but we still need an area for our playground.
-
 
 # Code for enabling passthrough
 In your player scene, click the root XROrigin3D, and click the white scroll icon to add a new gdscript to the node.
@@ -117,6 +115,11 @@ func _ready():
 	print("XRDBG: viewport.transparent_bg =", viewport.transparent_bg)
 ```
 This code is what enables xr, sets viewport background to transparent, initializes the xr mode, and enables passthrough if supported, which it is, but we check anyway.
+
+
+
+All that is left is making a scene so we can have objects such as a cube in our passthrough to verify it works. Sure, seeing the meshes in either hand confirms it, but we still need an area for our playground.
+
 
 
 
