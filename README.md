@@ -23,8 +23,7 @@ Must use the Godot Engine from their official website. Steam version will NOT wo
 ## Enable Developer Mode
 * On your headset, go to the settings app, search for "developer", choose "Developer Options", turn it on.
 * Next, scroll down until you see an option labeled "Wireless Debugging" and turn it on.
-* This part might be weird, but the label "Wireless Debugging" is technically two buttons - the on/off, and a "more". Press the label that says "Wireless debugging" to get to the "more" part.
-* This is the wireless debugging page where we begin to tell the headset to both pair and connect to your PC.
+This part might be weird, but the label "Wireless Debugging" is technically two buttons - the on/off, and a "more". Press the label that says "Wireless debugging" to get to the "more" part. This is the wireless debugging page where we begin to tell the headset to both pair and connect to your PC.
 * Choose "Pair device with pairing code", and you will see a window titled "Pair with device" with a code and an IP:PORT underneath it.
 
 # Connect Headset to Computer
@@ -32,16 +31,16 @@ Must use the Godot Engine from their official website. Steam version will NOT wo
 * In your terminal, type this command:
 `adb start-server` which makes your computer say "Hey I can be connected to"
 * Now type this(note: replace "IP":"PORT" with your actual IP and Port)
-command: `adb pair IP:PORT` then enter the pair code seen in your headset.
-* Once that is completed, the window for pairing in your headset should disappear, and you will notice a different IP:PORT. Type this command: `adb connect IP:PORT` using the different IP:PORT, and this actually connects the device to your computer. A little confusing that the device has two IP:PORTs, but it's fine.
-* If everything is done correctly, you should see the name of your computer in your headset developer options, and when you run `adb devices` in your terminal, you should see a device. That device is your headset.
+command: `adb pair IP:PORT` using the same IP:PORT seen in your headset with the pairing code. Enter the pair code seen in your headset into the console when it asks for a code.
+* Once completed, the window for pairing in your headset should disappear, and you will notice an IP:PORT that is outside of the pairing menu. 
+* Type this command: `adb connect IP:PORT` using the IP:PORT seen in the headset, and this actually connects the device to your computer. 
+If everything is done correctly, you should see the name of your computer in your headset developer options, and when you run `adb devices` in your terminal, you should see a device. That device is your headset.
 
 ## Debugging:
 * If for some reason, your device is not connecting, below are some steps that could possibly resolve the issue.
 * First, try turning off the wireless debugging for 10 seconds, and back on. Run `adb devices` and if your device is there, you're fine.
 * If re-toggling wireless debugging didn't work, try typing `adb kill-server` then `adb start-server`, and then try the re-toggling wireless debugging in your headset.
 
-* To really ensure the device is connected, you can also run `adb shell echo CONNECTED` which will tell you a bit more information than `adb devices`.
 
 
 # Godot Project Setup
@@ -49,7 +48,7 @@ This next part will get you started on creating a PASSTHROUGH game in godot, and
 * Before anything, create a project using the "create" button, and choose forward+ as the renderer.
 * Inside your new project, go to the AssetLib in the top middle of Godot, and search for "OpenXR Vendors Plugin" and choose the one with the highest version. Since we are on Godot 4.x, choose v4 of the plugin.
 
-* Enable OpenXR in your project settings. I just search for OpenXR and tick the on, as that is the quickest way than scrolling through every godot project option. Restart editor once completed.
+* Enable OpenXR in your project settings. (I just search for OpenXR and tick the on, as that is the quickest way than scrolling through every godot project option.) Restart editor once completed.
 
 Next is super important, and this is also where the plugin comes into play.
 
@@ -57,7 +56,8 @@ Next is super important, and this is also where the plugin comes into play.
 * Hand Tracking
 * Eye Gaze Interaction
 * Androidxr's Passthrough Camera State
-* Enable Shaders (Project Settings > XR > Shaders - on)
+
+* Also Enable Shaders which is in Project Settings > XR > Shaders - on
 
 If you want to understand more about what these options do, simply hover your mouse over each option and read its description. If you need more information, go on the godot's documentation to know more.
 
@@ -65,9 +65,10 @@ If you want to understand more about what these options do, simply hover your mo
 
 
 ## Android Export Configuration
-* Click project > Export > Add > Android. This will make an Android export template. You will most likely have a message saying something along the lines of "Target platform requires 'ETC2/ASTC' texture compression" and to enable it. Click the "Show Project Settings" button in that error message, and click on. Save and restart godot.
+* Click project > Export > Add > Android. 
+This will make an Android export template. You will most likely have a message saying something along the lines of "Target platform requires 'ETC2/ASTC' texture compression" and to enable it. To resolve this error, click the "Show Project Settings" button in that error message, and click on. Save and restart godot.
 
-* Now, we have to enable a handful of options in this editor menu. Add the options below:
+Now, we have to enable a handful of options in this export menu. Inside the export menu, add the options below:
 * Use Gradle Build
 * XR Mode > OpenXR
 * Enable Androidxr Plugin
@@ -78,15 +79,22 @@ If you want to understand more about what these options do, simply hover your mo
 Export settings are done, so we can just click export once ready, but we aren't yet. Below is how to make a player controller so that in passthrough we can control the camera and have hands(HAND TRACKING NOT INCLUDED).
 
 # XR Player Scene Setup
-* In a new scene, click other node, search for XROrigin3D. It is important that this is the root of our player.
-* Add three Children to the XROrigin3D node: 2 XRNode3D nodes(DO NOT DUPLICATE. ADD MANUALLY) and an XRCamera3D.
-* Make sure to raise the XRCamera3D and the hands up a little bit to avoid bugs.
+* Make a new scene by clicking scene > new scene
+If you have a fresh project, you should already see a list of options on the left hand side labeled "NODE3D, NODE2D, USER INTERFACE, and OTHER NODE.
+* Click other node, search for XROrigin3D. this should be the only node as of now.
+* rename via f2 to "Player" then control S to save as "Player"
+
+The node that is at the top, is considered the root node.
+
+* Add three Children(Control A while "Player" is selected) to the XROrigin3D node: 2 XRNode3D nodes(DO NOT DUPLICATE. ADD MANUALLY) and an XRCamera3D.
+Follow the hierarchy in the left hand panel to know which node is a child of which.
+* Make sure to raise the XRCamera3D and the XRNODE3D nodes(which will later be referred to as our hands) up to 1.0 on the y axis using the transform drop-down on the right hand side (labeled inspector). this is to avoid bugs with the floor later.
 
 Once more, if you need more information on what these nodes do, you can get a description of them in the add node window before confirming your node.
 
 * Rename the XRNode3D nodes to LeftHand/RightHand respectively, and it's optional to rename the XRCamera3D, but I rename it to HMD or Headset.
 * Click on Left/RightHand nodes and choose the Trackers Left/Right_hand respectively.
-* These instructions don't show how to get hand tracking working, but you can still add a mesh to each node, which we will do below.
+These instructions don't show how to get hand tracking working, but you can still add a mesh to each node, which we will do below.
 * Add a child to each Hand: CSGBox3D with collision enabled if you want collision.
 
 
@@ -120,21 +128,26 @@ This code is what enables xr, sets viewport background to transparent, initializ
 
 
 
-All that is left is making a scene so we can have objects such as a cube in our passthrough to verify it works. Sure, seeing the meshes in either hand confirms it, but we still need an area for our playground.
+All that is left is making a playground scene so we can have objects such as a cube in our passthrough to verify it works. Sure, seeing the meshes in either hand confirms it, but we still need an area for our playground.
 
 
 
-
-* Make a new scene with a Node3D as its root. Add a CSGBox3D node as a child and set collision to on. This is our floor. Use F2 to rename if you want to.
+* Make a new scene(scene > new scene) with a Node3D as its root. Save this as "playground" as this is where all of our game objects will be seen.
+* Add a CSGBox3D node as a child and set collision to on. This is our floor. Use F2 to rename if you want to.
 * Add your player scene(.tscn file) to this scene. You can drag and drop or right click on the player file and click "Instantiate". Both do the same thing.
-* We don't want to see the floor in passthrough, we want to see our world's floor in passthrough. To do this, we have to set the floor node to transparent. To do this, click on the CSGBox3D node, and in your inspector(rigth-hand side) look for Material. Right click and choose "StandardMaterial3D" then click on the white sphere that appears.
+Make sure you have the top node/ root node selected or else the player will be a child of the floor.
+We don't want to see the floor in passthrough, we want to see our world's floor in passthrough. To do this, we have to set the floor node to transparent. 
+* click on the CSGBox3D node, and in your right side look for Material. Right click and choose "StandardMaterial3D" then click on the white sphere that appears.
 * Scroll to Transparency and choose the Transparency option that says "Alpha".
 * Scroll down to the Albedo option, and change the Color option(opens an RGB color wheel) to a transparent color by dragging the Alpha value(A) to the left. You should see the CSGBox3D turn blue, but that only happens, because we have it selected. If you click outside of the floor, you shouldn't see the CSGBox3D.
+The last step for this scene is to make sure Godot knows what to spawn us in in order for everything to actually work.
+* Go to Project settings > Run and choose your scene via the paper icon, then find and double click on your Playground.tscn file.
 
 # Install your game to headset.
 Now we're going to install the game to the headset and see if we see our cube hands.
 
 * Click project > Export > Click Android(Runnable) > Export Project. A window will appear to give your game apk file(the file we install to the headset) a name, and a directory to save it to. Just save it to your project.
+## note: project name is the name of your app NOT the app file name.
 * A big window will appear. Just wait a little bit(shouldn't take more than a minute or so).
 * Now go to your terminal and change the directory(cd command) to your project directory. Something like `cd my-xr-project/` replacing `my-xr-project` with your project name.
 
