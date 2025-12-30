@@ -89,6 +89,7 @@ The node that is at the top, is considered the root node.
 * Add three Children(Control A while "Player" is selected) to the XROrigin3D node: 2 XRNode3D nodes(DO NOT DUPLICATE. ADD MANUALLY) and an XRCamera3D.
 Follow the hierarchy in the left hand panel to know which node is a child of which.
 * Make sure to raise the XRCamera3D and the XRNODE3D nodes(which will later be referred to as our hands) up to 1.0 on the y axis using the transform drop-down on the right hand side (labeled inspector). this is to avoid bugs with the floor later.
+* click on each box and set their scale to x: 0.1, y:0.1, and z:0.1
 
 Once more, if you need more information on what these nodes do, you can get a description of them in the add node window before confirming your node.
 
