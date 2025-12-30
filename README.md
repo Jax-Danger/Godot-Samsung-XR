@@ -141,6 +141,8 @@ We don't want to see the floor in passthrough, we want to see our world's floor 
 * click on the CSGBox3D node, and in your right side look for Material. Right click and choose "StandardMaterial3D" then click on the white sphere that appears.
 * Scroll to Transparency and choose the Transparency option that says "Alpha".
 * Scroll down to the Albedo option, and change the Color option(opens an RGB color wheel) to a transparent color by dragging the Alpha value(A) to the left. You should see the CSGBox3D turn blue, but that only happens, because we have it selected. If you click outside of the floor, you shouldn't see the CSGBox3D.
+To add lighting, there are three dots in the middle of your playground scene. It has a sun and world icon, and the three dots.
+* click on both, and click "Add _ to scene" where _ and both environment and sun. after clicking add to scene, you'll have to click the three dots again to add the next one. the window will disappear after choosing add _ to scene.
 The last step for this scene is to make sure Godot knows what to spawn us in in order for everything to actually work.
 * Go to Project settings > Run and choose your scene via the paper icon, then find and double click on your Playground.tscn file.
 
