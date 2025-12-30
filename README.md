@@ -46,9 +46,8 @@ command: `adb pair IP:PORT` then enter the pair code seen in your headset.
 
 # Godot Project Setup
 This next part will get you started on creating a PASSTHROUGH game in godot, and install it on your device.
-
-* Before anything, go to the AssetLib in the top middle of Godot, and search for "OpenXR Vendors Plugin" and choose the one with the highest version. Since we are on Godot 4.x, choose v4 of the plugin.
-
+* Before anything, create a project using the "create" button, and choose forward+ as the renderer.
+* Inside your new project, go to the AssetLib in the top middle of Godot, and search for "OpenXR Vendors Plugin" and choose the one with the highest version. Since we are on Godot 4.x, choose v4 of the plugin.
 
 * Enable OpenXR in your project settings. I just search for OpenXR and tick the on, as that is the quickest way than scrolling through every godot project option. Restart editor once completed.
 
